@@ -17,7 +17,7 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
 3. Start MongoDb
 
    ```bash
-   docker run -p 27017:27017 --rm -d --name project-template-mongodb -v "$(pwd)../data:/data/db" mongo:latest
+   docker run -p 27017:27017 --rm -d --name project-template-mongodb -v "$(git rev-parse --show-toplevel)/data:/data/db" mongo:latest
    ```
 
 4. Start your app (for development)

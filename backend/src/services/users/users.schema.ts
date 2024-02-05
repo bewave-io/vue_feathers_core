@@ -2,19 +2,21 @@
 import type { HookContext } from '../../declarations';
 import type { UserService } from './users.class';
 
-import { resolve } from '@feathersjs/schema';
+import {resolve, virtual} from '@feathersjs/schema';
 import { Type, getValidator, querySyntax } from '@feathersjs/typebox';
 import { ObjectIdSchema } from '@feathersjs/typebox';
 import type { Static } from '@feathersjs/typebox';
 import { passwordHash } from '@feathersjs/authentication-local';
 import { dataValidator, queryValidator } from '../../validators';
-import { createHash } from 'node:crypto';
+import { createHash } from "node:crypto";
 
 // Main data model schema
 export const userSchema = Type.Object(
   {
     _id: ObjectIdSchema(),
-    displayName: Type.String(),
+    firstName: Type.String(),
+    lastName: Type.String(),
+    fullName: Type.String(),
     avatarUrl: Type.String(),
     email: Type.String(),
     password: Type.Optional(Type.String()),
@@ -23,7 +25,11 @@ export const userSchema = Type.Object(
 );
 export type User = Static<typeof userSchema>;
 export const userValidator = getValidator(userSchema, dataValidator);
-export const userResolver = resolve<User, HookContext<UserService>>({});
+export const userResolver = resolve<User, HookContext<UserService>>({
+  fullName: virtual(async (user, context) => {
+    return `${user.firstName} ${user.lastName}`.trim();
+  })
+});
 
 export const userExternalResolver = resolve<User, HookContext<UserService>>({
   // The password should never be visible externally
@@ -31,7 +37,7 @@ export const userExternalResolver = resolve<User, HookContext<UserService>>({
 });
 
 // Schema for creating new entries
-export const userDataSchema = Type.Pick(userSchema, ['displayName', 'email', 'password'], {
+export const userDataSchema = Type.Pick(userSchema, ['firstName', 'lastName', 'email', 'password'], {
   $id: 'UserData',
 });
 export type UserData = Static<typeof userDataSchema>;
@@ -55,7 +61,7 @@ export const userPatchResolver = resolve<User, HookContext<UserService>>({
 });
 
 // Schema for allowed query properties
-export const userQueryProperties = Type.Pick(userSchema, ['_id', 'email', 'displayName']);
+export const userQueryProperties = Type.Pick(userSchema, ['_id', 'email', 'firstName', 'lastName']);
 export const userQuerySchema = Type.Intersect(
   [
     querySyntax(userQueryProperties),

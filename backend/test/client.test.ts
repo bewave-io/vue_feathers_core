@@ -3,7 +3,6 @@ import assert from 'assert';
 import axios from 'axios';
 
 import rest from '@feathersjs/rest-client';
-import authenticationClient from '@feathersjs/authentication-client';
 import { app } from '../src/app';
 import { createClient } from '../src/client';
 import type { UserData } from '../src/client';
@@ -28,7 +27,8 @@ describe('application client tests', () => {
 
   it('creates and authenticates a user with email and password', async () => {
     const userData: UserData = {
-      displayName: 'test user',
+      firstName: 'Test',
+      lastName: 'User',
       email: 'someone@example.com',
       password: 'supersecret',
     };
