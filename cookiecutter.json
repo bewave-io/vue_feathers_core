@@ -1,0 +1,7 @@
+{
+  "project_name": "Vue + Feathers.js App",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+  "project_short_description": "A Boilerplate project for Vue and Feathers.js ",
+  "frontend_framework": ["quasar", "vuetify"],
+  "database_backend": ["mongodb"]
+}
