@@ -10,9 +10,9 @@ const auth = useAuthStore();
     <div class="q-pa-md flex flex-center">
       <div class="container text-center">
         <h1 class="text-h4">
-          Welcome to the project template for
+          Welcome to {{ cookiecutter.project_name }} for
           <q-img :src="bewaveLogoUrl" height="2em" fit="contain" alt="Bewave" />
-        </h1>
+        </h1>{% raw %}
         <div class="flex column flex-center">
           <p v-if="auth.isAuthenticated">Welcome {{ auth.user.fullName }}</p>
           <p v-else>
@@ -31,7 +31,7 @@ const auth = useAuthStore();
               <q-item-label
                 >View feature {{ feature.toUpperCase() }}</q-item-label
               >
-            </q-item>
+            </q-item>{% endraw %}
           </q-list>
         </div>
       </div>

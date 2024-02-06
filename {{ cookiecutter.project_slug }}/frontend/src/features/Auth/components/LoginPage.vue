@@ -51,7 +51,7 @@ const handleLogin = async () => {
           </template>
         </q-input>
         <p v-if="authStore.error" class="text-red">
-          {{ authStore.error?.message }}
+          {% raw %}{{ authStore.error?.message }}{% endraw %}
         </p>
         <div class="row flex-center">
           <q-btn

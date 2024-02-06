@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ServiceInstance } from 'feathers-pinia';
-import type { User } from 'project-template-backend';
+import type { User } from '{{ cookiecutter.project_slug }}-backend';
 
 import { ref } from 'vue';
 import { checkEmail, checkRequiredString } from '@f/Global/validation';

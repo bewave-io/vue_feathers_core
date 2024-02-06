@@ -30,7 +30,7 @@ const handleLogout = async () => {
           @click="router.push({ name: 'index' })"
           :class="route.name === 'index' ? '' : 'cursor-pointer'"
         >
-          Project Template
+          {{ cookiecutter.project_name }}
         </q-toolbar-title>
         <div v-if="auth.isAuthenticated && auth.user">
           <user-avatar :user="auth.user" :size="80">

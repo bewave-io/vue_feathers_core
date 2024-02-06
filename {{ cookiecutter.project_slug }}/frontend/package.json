@@ -1,26 +1,32 @@
 {
-  "name": "project-template-frontend",
+  "name": "{{ cookiecutter.project_slug }}-frontend",
   "version": "0.1.0",
-  "description": "Project Template - Frontend",
-  "productName": "Project Template - Frontend",
+  "description": "{{ cookiecutter.project_name }} - Frontend",
+  "productName": "{{ cookiecutter.project_name }} - Frontend",
   "author": "Bewave <dev@bewave.io>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
+{% if cookiecutter.frontend_framework == "quasar" %}
     "dev": "quasar dev",
     "build": "quasar build"
+{% endif %}
   },
   "dependencies": {
     "@feathersjs/authentication-client": "^5.0.21",
     "@feathersjs/feathers": "^5.0.21",
     "@feathersjs/socketio-client": "^5.0.21",
+{% if cookiecutter.frontend_framework == "quasar" %}
     "@quasar/extras": "^1.16.9",
+{% endif %}
     "feathers-pinia": "4.1.1",
     "pinia": "^2.1.7",
-    "project-template-backend": "http://localhost:3030/project-template-backend-0.1.0.tgz",
+    "{{ cookiecutter.project_slug }}-backend": "http://localhost:3030/{{ cookiecutter.project_slug }}-backend-0.1.0.tgz",
+{% if cookiecutter.frontend_framework == "quasar" %}
     "quasar": "^2.14.2",
+{% endif %}
     "socket.io-client": "^4.7.4",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
