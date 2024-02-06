@@ -1,7 +1,31 @@
+<script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
+import { useAuthStore } from '@/features/Auth/store';
+import UserAvatar from '@f/Auth/components/UserAvatar.vue';
+
+const $q = useQuasar();
+const router = useRouter();
+const route = useRoute();
+const auth = useAuthStore();
+
+const handleLogout = async () => {
+  await auth.logout();
+  $q.notify({
+    color: 'green-4',
+    textColor: 'white',
+    icon: 'logout',
+    message: 'Logged out!',
+  });
+  await router.push({ name: 'index' });
+  window.location.reload();
+};
+</script>
+
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="container q-mx-auto">
         <q-toolbar-title
           @click="router.push({ name: 'index' })"
           :class="route.name === 'index' ? '' : 'cursor-pointer'"
@@ -33,26 +57,3 @@
     </q-page-container>
   </q-layout>
 </template>
-
-<script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router';
-import { useQuasar } from 'quasar';
-import { useAuthStore } from '@/features/Auth/store';
-import UserAvatar from 'src/features/Auth/components/UserAvatar.vue';
-
-const $q = useQuasar();
-const router = useRouter();
-const route = useRoute();
-const auth = useAuthStore();
-
-const handleLogout = async () => {
-  await auth.logout();
-  $q.notify({
-    color: 'green-4',
-    textColor: 'white',
-    icon: 'logout',
-    message: 'Logged out!',
-  });
-  await router.push({ name: 'index' });
-};
-</script>

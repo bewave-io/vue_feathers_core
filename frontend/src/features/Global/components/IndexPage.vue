@@ -13,7 +13,7 @@ const auth = useAuthStore();
           Welcome to the project template for
           <q-img :src="bewaveLogoUrl" height="2em" fit="contain" alt="Bewave" />
         </h1>
-        <div class="row flex-center">
+        <div class="flex column flex-center">
           <p v-if="auth.isAuthenticated">Welcome {{ auth.user.fullName }}</p>
           <p v-else>
             You are not logged in. You may do so here:
@@ -21,6 +21,18 @@ const auth = useAuthStore();
             /
             <router-link :to="{ name: 'auth-signup' }">Signup</router-link>
           </p>
+          <q-list bordered style="max-width: 300px" class="text-center">
+            <q-item :to="{ name: 'user-list' }">View users</q-item>
+            <q-item
+              :to="{ name: `feature-${feature}` }"
+              :key="`feature-${feature}`"
+              v-for="feature in ['a', 'b', 'c']"
+            >
+              <q-item-label
+                >View feature {{ feature.toUpperCase() }}</q-item-label
+              >
+            </q-item>
+          </q-list>
         </div>
       </div>
     </div>

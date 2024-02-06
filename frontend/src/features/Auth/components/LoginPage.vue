@@ -50,9 +50,9 @@ const handleLogin = async () => {
             />
           </template>
         </q-input>
-        <div v-if="authStore.error">
+        <p v-if="authStore.error" class="text-red">
           {{ authStore.error?.message }}
-        </div>
+        </p>
         <div class="row flex-center">
           <q-btn
             label="Log in"

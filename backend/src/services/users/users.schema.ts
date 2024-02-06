@@ -75,9 +75,10 @@ export const userQueryValidator = getValidator(userQuerySchema, queryValidator);
 export const userQueryResolver = resolve<UserQuery, HookContext<UserService>>({
   // If there is a user (e.g. with authentication), they are only allowed to see their own data
   _id: async (value, user, context) => {
-    if (context.params.user) {
-      return context.params.user._id;
-    }
+    // @TODO create an admin role and only allow them to view all users
+    // if (context.params.user) {
+    //   return context.params.user._id;
+    // }
     return value;
   },
 });
