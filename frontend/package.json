@@ -1,0 +1,47 @@
+{
+  "name": "polymorphic-tasks-frontend",
+  "version": "0.1.0",
+  "description": "Polymorphic Tasks - Frontend",
+  "productName": "Polymorphic Tasks - Frontend",
+  "author": "Bewave <dev@bewave.io>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "quasar build",
+    "dev": "quasar dev"
+  },
+  "dependencies": {
+    "@feathersjs/authentication-client": "^5.0.21",
+    "@feathersjs/feathers": "^5.0.21",
+    "@feathersjs/socketio-client": "^5.0.21",
+    "@quasar/extras": "^1.16.9",
+    "feathers-pinia": "4.1.1",
+    "pinia": "^2.1.7",
+    "polymorphic-tasks-backend": "http://localhost:3030/polymorphic-tasks-backend-0.1.0.tgz",
+    "quasar": "^2.14.2",
+    "socket.io-client": "^4.7.4",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@quasar/app-vite": "^1.7.3",
+    "@types/node": "^20.11.16",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.21.1",
+    "postcss": "^8.4.33",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3",
+    "vite-svg-loader": "^5.1.0"
+  },
+  "engines": {
+    "node": "^20 || ^18 || ^16 || ^14.19",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}
