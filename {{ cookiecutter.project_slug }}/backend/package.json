@@ -1,6 +1,6 @@
 {
-  "name": "project-template-backend",
-  "description": "Project Template - Backend",
+  "name": "{{ cookiecutter.project_slug }}-backend",
+  "description": "{{ cookiecutter.project_name }} - Backend",
   "version": "0.1.0",
   "homepage": "",
   "private": true,

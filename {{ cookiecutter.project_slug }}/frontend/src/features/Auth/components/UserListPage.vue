@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { User as UserType } from 'project-template-backend';
+import type { User as UserType } from '{{ cookiecutter.project_slug }}-backend';
 import type { ServiceInstance } from 'feathers-pinia';
 
 import { useFeathersService } from '@/feathers-client';

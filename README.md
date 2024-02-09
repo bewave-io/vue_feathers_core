@@ -1,15 +1,37 @@
 # Vue + Feathers.js Boilerplate
 
-A template for starting projects using [Vue](https://vuejs.org/guide/introduction.html) ([Quasar](https://v2.quasar.dev)) and [Feathers.js](https://feathersjs.com/guides/).
+A template for starting projects using Vue (Quasar or Vuetify) and Feathers.js.
 
-## Backend
+## Install cookiecutter
 
-This project uses [Feathers.js](https://feathersjs.com/guides/) as a Backend and [MongoDB](https://www.mongodb.com/docs/) as the database.
+### You can install cookiecutter with `pip`:
 
-Located in `./backend`. View [`README.md`](./backend/README.md) for more info.
+```bash
+pip install -U cookiecutter
+```
 
-## Frontend
+### Or Via your system's package manager
 
-This project uses [Vue](https://vuejs.org/guide/introduction.html) with [Quasar](https://v2.quasar.dev) and [Feathers Pinia](https://feathers-pinia.pages.dev/guide/) as the Frontend
+#### Ubuntu
+```bash
+apt-get install cookiecutter
+```
 
-Located in `./frontend`. View [`README.md`](./frontend/README.md) for more info.
+#### Arch Linux
+```bash
+pacman -S python-cookiecutter
+````
+#### Mac OS
+
+```bash
+brew install cookiecutter
+```
+
+## Start Project
+
+
+And then simple enter `cookiecutter` followed by this repository's URL and answer the questions to create your project.
+
+```bash
+cookiecutter https://github.com/bewave-io/vue-feathers-core
+```

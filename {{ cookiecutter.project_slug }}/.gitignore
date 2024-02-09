@@ -1,0 +1,13 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# JavaScript
+node_modules/
+
+# dotenv
+.env
+
+# IDE settings
+.idea/
+.code

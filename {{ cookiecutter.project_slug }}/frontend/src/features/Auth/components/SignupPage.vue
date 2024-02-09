@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue';
 import type { ServiceInstance } from 'feathers-pinia';
-import type { UserData } from 'project-template-backend';
+import type { UserData } from '{{ cookiecutter.project_slug }}-backend';
 
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
@@ -44,7 +44,7 @@ const handleSignup = async (userClone: Ref<ServiceInstance<UserData>>) => {
       <user-form :user="newUser" @submit="handleSignup" button-label="Signup">
         <template #default>
           <div v-if="authStore.error">
-            {{ authStore.error?.message }}
+            {% raw %}{{ authStore.error?.message }}{% endraw %}
           </div>
         </template>
         <template #buttons>

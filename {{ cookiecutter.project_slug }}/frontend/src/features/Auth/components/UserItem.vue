@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { User as UserType } from 'project-template-backend';
+import type { User as UserType } from '{{ cookiecutter.project_slug }}-backend';
 
 import { type Ref, ref } from 'vue';
 import { useQuasar } from 'quasar';
@@ -61,7 +61,7 @@ const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
   }
 };
 </script>
-
+{% raw %}
 <template>
   <q-item>
     <q-item-section avatar>
@@ -122,3 +122,4 @@ const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
     </q-card>
   </q-dialog>
 </template>
+{% endraw %}
