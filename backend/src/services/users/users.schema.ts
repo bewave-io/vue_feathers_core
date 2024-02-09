@@ -2,13 +2,13 @@
 import type { HookContext } from '../../declarations';
 import type { UserService } from './users.class';
 
-import {resolve, virtual} from '@feathersjs/schema';
+import { resolve, virtual } from '@feathersjs/schema';
 import { Type, getValidator, querySyntax } from '@feathersjs/typebox';
 import { ObjectIdSchema } from '@feathersjs/typebox';
 import type { Static } from '@feathersjs/typebox';
 import { passwordHash } from '@feathersjs/authentication-local';
 import { dataValidator, queryValidator } from '../../validators';
-import { createHash } from "node:crypto";
+import { createHash } from 'node:crypto';
 
 // Main data model schema
 export const userSchema = Type.Object(
@@ -28,7 +28,7 @@ export const userValidator = getValidator(userSchema, dataValidator);
 export const userResolver = resolve<User, HookContext<UserService>>({
   fullName: virtual(async (user, context) => {
     return `${user.firstName} ${user.lastName}`.trim();
-  })
+  }),
 });
 
 export const userExternalResolver = resolve<User, HookContext<UserService>>({

@@ -1,7 +1,26 @@
 {
+  "authentication": {
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "entity": "user",
+    "jwtOptions": {
+      "algorithm": "HS256",
+      "audience": "https://example.com",
+      "expiresIn": "1d",
+      "header": {
+        "typ": "access"
+      }
+    },
+    "local": {
+      "passwordField": "password",
+      "usernameField": "email"
+    },
+    "service": "users"
+  },
   "host": "localhost",
-  "port": 3030,
-  "public": "./public/",
+  "mongodb": "mongodb://127.0.0.1:27017/backend",
   "origins": [
     "http://localhost:3030"
   ],
@@ -9,26 +28,6 @@
     "default": 999,
     "max": 999
   },
-  "mongodb": "mongodb://127.0.0.1:27017/backend",
-  "authentication": {
-    "entity": "user",
-    "service": "users",
-    "secret": "CHANGE_ME",
-    "authStrategies": [
-      "jwt",
-      "local"
-    ],
-    "jwtOptions": {
-      "header": {
-        "typ": "access"
-      },
-      "audience": "https://example.com",
-      "algorithm": "HS256",
-      "expiresIn": "1d"
-    },
-    "local": {
-      "usernameField": "email",
-      "passwordField": "password"
-    }
-  }
+  "port": 3030,
+  "public": "./public/"
 }

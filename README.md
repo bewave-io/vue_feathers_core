@@ -13,3 +13,8 @@ Located in `./backend`. View [`README.md`](./backend/README.md) for more info.
 This project uses [Vue](https://vuejs.org/guide/introduction.html) with [Quasar](https://v2.quasar.dev) and [Feathers Pinia](https://feathers-pinia.pages.dev/guide/) as the Frontend
 
 Located in `./frontend`. View [`README.md`](./frontend/README.md) for more info.
+
+## Code Style
+
+The frontend and backend have their own formatting tools and configs, but you can check the whole project using [`pre-commit`](https://pre-commit.com/).
+You can either run it manually with `pre-commit run --all-files` or have it run automatically on commit on staged files with `pre-commit install`.
