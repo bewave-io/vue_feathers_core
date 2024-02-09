@@ -2,7 +2,6 @@ import { route } from 'quasar/wrappers';
 import {
   createMemoryHistory,
   createRouter,
-  createWebHashHistory,
   createWebHistory,
 } from 'vue-router';
 import { RouteRecordRaw } from 'vue-router';
@@ -30,11 +29,7 @@ export default route(async (/* { store, ssrContext } */) => {
   /**
    * Create Router and register routes with Quasar.
    */
-  const createHistory = process.env.SERVER
-    ? createMemoryHistory
-    : process.env.VUE_ROUTER_MODE === 'history'
-      ? createWebHistory
-      : createWebHashHistory;
+  const createHistory = process.env.SERVER ? createMemoryHistory : createWebHistory
 
   const routes = await buildRoutes();
   return createRouter({

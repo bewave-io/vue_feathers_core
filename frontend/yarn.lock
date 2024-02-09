@@ -3479,7 +3479,7 @@ process-nextick-args@~2.0.0:
 
 "project-template-backend@http://localhost:3030/project-template-backend-0.1.0.tgz":
   version "0.1.0"
-  resolved "http://localhost:3030/project-template-backend-0.1.0.tgz#d87fc2c996cc73a9e0bebaeb7554d8415086b486"
+  resolved "http://localhost:3030/project-template-backend-0.1.0.tgz"
   dependencies:
     "@feathersjs/adapter-commons" "^5.0.21"
     "@feathersjs/authentication" "^5.0.21"

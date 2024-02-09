@@ -10,8 +10,9 @@ import UserForm from '@f/Auth/components/UserForm.vue';
 const User = useFeathersService('users');
 
 const params = computed(() => ({ query: {} }));
-const users$ = User.useFind(params, { paginateOn: 'server' });
+const users$ = User.useFind(params, { paginateOn: 'hybrid' });
 const users = computed(() => users$.data);
+
 const showCreateForm = ref<boolean>(false);
 const newUser = ref(User.new());
 
