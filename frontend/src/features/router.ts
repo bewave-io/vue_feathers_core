@@ -29,7 +29,9 @@ export default route(async (/* { store, ssrContext } */) => {
   /**
    * Create Router and register routes with Quasar.
    */
-  const createHistory = process.env.SERVER ? createMemoryHistory : createWebHistory
+  const createHistory = process.env.SERVER
+    ? createMemoryHistory
+    : createWebHistory;
 
   const routes = await buildRoutes();
   return createRouter({

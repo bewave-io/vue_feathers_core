@@ -12,8 +12,8 @@ const myModel = reactive({
 const isPending = ref(false);
 const handleSave = (clone: typeof myModel) => {
   console.log('Save called', clone);
-  isPending.value = true
-  setTimeout(() => isPending.value = false, 1000);
+  isPending.value = true;
+  setTimeout(() => (isPending.value = false), 1000);
 };
 
 // Test Focus group 2
@@ -36,7 +36,12 @@ const handleSaveDog = async (clone: typeof dogModel) => {
   <q-page padding class="flex flex-center text-center">
     <div class="col">
       <h1 class="text-h4">Test focus groups</h1>
-      <focus-group :data="myModel" class="col" @save="handleSave" :is-pending="isPending">
+      <focus-group
+        :data="myModel"
+        class="col"
+        @save="handleSave"
+        :is-pending="isPending"
+      >
         <template #display="{ data }">
           <template>
             {{ data.nickname }} {{ data.firstName }} {{ data.lastName }}
@@ -44,22 +49,27 @@ const handleSaveDog = async (clone: typeof dogModel) => {
         </template>
         <template #edit="{ data }">
           <div class="row q-col-gutter-md flex">
-            <q-input v-model="data.firstName" class="col-4" autofocus/>
+            <q-input v-model="data.firstName" class="col-4" autofocus />
             <q-input v-model="data.lastName" class="col-4" />
-            <q-input v-model="data.nickname" class="col-4 order-first"/>
+            <q-input v-model="data.nickname" class="col-4 order-first" />
           </div>
         </template>
       </focus-group>
       <q-input v-model="anotherTest" label="Another field" />
-      <focus-group :data="dogModel" class="col" @save="handleSaveDog" :is-pending="isDogPending">
+      <focus-group
+        :data="dogModel"
+        class="col"
+        @save="handleSaveDog"
+        :is-pending="isDogPending"
+      >
         <template #display="{ data }">
           {{ data.nickname }} {{ data.firstName }} {{ data.lastName }}
         </template>
         <template #edit="{ data }">
           <div class="row q-col-gutter-md flex">
-            <q-input v-model="data.firstName" class="col-4" autofocus/>
+            <q-input v-model="data.firstName" class="col-4" autofocus />
             <q-input v-model="data.lastName" class="col-4" />
-            <q-input v-model="data.nickname" class="col-4 order-first"/>
+            <q-input v-model="data.nickname" class="col-4 order-first" />
           </div>
         </template>
       </focus-group>

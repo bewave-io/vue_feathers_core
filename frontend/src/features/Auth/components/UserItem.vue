@@ -9,7 +9,7 @@ import { ServiceInstance } from 'feathers-pinia';
 
 import UserAvatar from '@f/Auth/components/UserAvatar.vue';
 import UserForm from '@f/Auth/components/UserForm.vue';
-import FocusGroup from '@f/FocusGroup/components/FocusGroup.vue';
+import PiniaFocusGroup from '@f/FocusGroup/components/PiniaFocusGroup.vue';
 
 const props = defineProps<{ user: ServiceInstance<UserType> }>();
 const $q = useQuasar();
@@ -73,7 +73,7 @@ const updateUser = async (userClone: Ref<ServiceInstance<UserType>>) => {
     </q-item-section>
     <q-item-section>
       <q-item-label class="q-mt-sm">
-        <focus-group :is-pending="isPending" :data="user" @save="updateUser">
+        <pinia-focus-group :model="user">
           <template #display="{ data }">
             {{ data.firstName }} {{ data.lastName }}
           </template>
@@ -83,7 +83,7 @@ const updateUser = async (userClone: Ref<ServiceInstance<UserType>>) => {
               <q-input v-model="data.lastName" class="col-6" />
             </div>
           </template>
-        </focus-group>
+        </pinia-focus-group>
       </q-item-label>
     </q-item-section>
     <q-item-section>
