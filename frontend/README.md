@@ -1,6 +1,7 @@
 # Project Template - Frontend
 
-Project Frontend using [Vue](https://vuejs.org/guide/introduction.html) with [Quasar](https://v2.quasar.dev) and [Feathers Pinia](https://feathers-pinia.pages.dev/guide/)
+Project Frontend using [Vue](https://vuejs.org/guide/introduction.html)
+with [Quasar](https://v2.quasar.dev) and [Feathers Pinia](https://feathers-pinia.pages.dev/guide/)
 
 ## Install the dependencies
 

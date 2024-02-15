@@ -1,17 +1,5 @@
 {
-  "name": "project-template-frontend",
-  "version": "0.1.0",
-  "description": "Project Template - Frontend",
-  "productName": "Project Template - Frontend",
   "author": "Bewave <dev@bewave.io>",
-  "private": true,
-  "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue ./",
-    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0",
-    "dev": "quasar dev",
-    "build": "quasar build"
-  },
   "dependencies": {
     "@feathersjs/authentication-client": "^5.0.21",
     "@feathersjs/feathers": "^5.0.21",
@@ -25,6 +13,7 @@
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },
+  "description": "Project Template - Frontend",
   "devDependencies": {
     "@quasar/app-vite": "^1.7.3",
     "@types/node": "^20.11.16",
@@ -43,5 +32,16 @@
     "node": "^20 || ^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
-  }
+  },
+  "name": "project-template-frontend",
+  "private": true,
+  "productName": "Project Template - Frontend",
+  "scripts": {
+    "build": "quasar build",
+    "dev": "quasar dev",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "version": "0.1.0"
 }

@@ -1,48 +1,7 @@
 {
-  "name": "project-template-backend",
-  "description": "Project Template - Backend",
-  "version": "0.1.0",
-  "homepage": "",
-  "private": true,
-  "keywords": [
-    "feathers"
-  ],
   "author": "Bewave <dev@bewave.io>",
-  "contributors": [],
   "bugs": {},
-  "engines": {
-    "node": ">= 18.19.0"
-  },
-  "feathers": {
-    "language": "ts",
-    "packager": "yarn",
-    "database": "mongodb",
-    "framework": "koa",
-    "transports": [
-      "rest",
-      "websockets"
-    ],
-    "schema": "typebox"
-  },
-  "directories": {
-    "lib": "src",
-    "test": "test"
-  },
-  "files": [
-    "lib/client.js",
-    "lib/**/*.d.ts",
-    "lib/**/*.shared.js"
-  ],
-  "main": "lib/client",
-  "scripts": {
-    "dev": "nodemon -x ts-node src/index.ts",
-    "compile": "shx rm -rf lib/ && tsc",
-    "start": "node lib/",
-    "format": "npx prettier \"**/*.ts\" --write",
-    "mocha": "cross-env NODE_ENV=test mocha test/ --require ts-node/register --recursive --extension .ts --exit",
-    "test": "npm run mocha",
-    "bundle:client": "npm run compile && npm pack --pack-destination ./public"
-  },
+  "contributors": [],
   "dependencies": {
     "@feathersjs/adapter-commons": "^5.0.21",
     "@feathersjs/authentication": "^5.0.21",
@@ -60,6 +19,7 @@
     "mongodb": "^6.3.0",
     "winston": "^3.11.0"
   },
+  "description": "Project Template - Backend",
   "devDependencies": {
     "@feathersjs/cli": "^5.0.21",
     "@feathersjs/rest-client": "^5.0.21",
@@ -73,5 +33,45 @@
     "shx": "^0.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
-  }
+  },
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "engines": {
+    "node": ">= 18.19.0"
+  },
+  "feathers": {
+    "database": "mongodb",
+    "framework": "koa",
+    "language": "ts",
+    "packager": "yarn",
+    "schema": "typebox",
+    "transports": [
+      "rest",
+      "websockets"
+    ]
+  },
+  "files": [
+    "lib/client.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.shared.js"
+  ],
+  "homepage": "",
+  "keywords": [
+    "feathers"
+  ],
+  "main": "lib/client",
+  "name": "project-template-backend",
+  "private": true,
+  "scripts": {
+    "bundle:client": "npm run compile && npm pack --pack-destination ./public",
+    "compile": "shx rm -rf lib/ && tsc",
+    "dev": "nodemon -x ts-node src/index.ts",
+    "format": "npx prettier \"**/*.ts\" --write",
+    "mocha": "cross-env NODE_ENV=test mocha test/ --require ts-node/register --recursive --extension .ts --exit",
+    "start": "node lib/",
+    "test": "npm run mocha"
+  },
+  "version": "0.1.0"
 }

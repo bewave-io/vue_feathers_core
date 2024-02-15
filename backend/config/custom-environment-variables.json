@@ -1,10 +1,10 @@
 {
-  "port": {
-    "__name": "PORT",
-    "__format": "number"
-  },
-  "host": "HOSTNAME",
   "authentication": {
     "secret": "FEATHERS_SECRET"
+  },
+  "host": "HOSTNAME",
+  "port": {
+    "__format": "number",
+    "__name": "PORT"
   }
 }
