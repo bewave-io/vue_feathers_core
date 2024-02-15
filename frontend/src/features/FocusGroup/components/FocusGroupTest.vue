@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import FocusGroup from "./FocusGroup.vue";
-import { sleep } from "@f/Global/helper";
+import FocusGroup from './FocusGroup.vue';
+import { sleep } from '@f/Global/helper';
 
 // Test Focus Group 1
 const myModel = reactive({
@@ -9,7 +9,6 @@ const myModel = reactive({
   lastName: 'Sopel',
   nickname: 'Hello',
 });
-const errors = reactive({});
 const isPending = ref(false);
 const handleSave = (clone: typeof myModel) => {
   console.log('Save called', clone);
@@ -25,12 +24,10 @@ const dogModel = reactive({
 });
 const anotherTest = ref('');
 const isDogPending = ref(false);
-const dogErrors = reactive({firstName: ''});
 const handleSaveDog = async (clone: typeof dogModel) => {
   console.log('Save called', clone);
   isDogPending.value = true;
   await sleep();
-  dogErrors.firstName = 'First Name is invalid.';
   isDogPending.value = false;
 };
 </script>
@@ -39,28 +36,28 @@ const handleSaveDog = async (clone: typeof dogModel) => {
   <q-page padding class="flex flex-center text-center">
     <div class="col">
       <h1 class="text-h4">Test focus groups</h1>
-      <focus-group v-model="myModel" class="col" :errors="errors" @save="handleSave" :is-pending="isPending">
-        <template #display="{ model }">
-         {{ model.nickname }} {{ model.firstName }} {{ model.lastName }}
+      <focus-group :data="myModel" class="col" @save="handleSave" :is-pending="isPending">
+        <template #display="{ data }">
+         {{ data.nickname }} {{ data.firstName }} {{ data.lastName }}
         </template>
-        <template #edit="{ model }">
+        <template #edit="{ data }">
           <div class="row q-col-gutter-md flex">
-            <q-input v-model="model.firstName" class="col-4" autofocus/>
-            <q-input v-model="model.lastName" class="col-4" />
-            <q-input v-model="model.nickname" class="col-4 order-first"/>
+            <q-input v-model="data.firstName" class="col-4" autofocus/>
+            <q-input v-model="data.lastName" class="col-4" />
+            <q-input v-model="data.nickname" class="col-4 order-first"/>
           </div>
         </template>
       </focus-group>
       <q-input v-model="anotherTest" label="Another field" />
-      <focus-group v-model="dogModel" class="col" :errors="dogErrors" @save="handleSaveDog" :is-pending="isDogPending">
-        <template #display="{ model }">
-          {{ model.nickname }} {{ model.firstName }} {{ model.lastName }}
+      <focus-group :data="dogModel" class="col" @save="handleSaveDog" :is-pending="isDogPending">
+        <template #display="{ data }">
+          {{ data?.nickname }} {{ data?.firstName }} {{ data?.lastName }}
         </template>
-        <template #edit="{ model }">
+        <template #edit="{ data }">
           <div class="row q-col-gutter-md flex">
-            <q-input v-model="model.firstName" class="col-4" autofocus/>
-            <q-input v-model="model.lastName" class="col-4" />
-            <q-input v-model="model.nickname" class="col-4 order-first"/>
+            <q-input v-model="data.firstName" class="col-4" autofocus/>
+            <q-input v-model="data.lastName" class="col-4" />
+            <q-input v-model="data.nickname" class="col-4 order-first"/>
           </div>
         </template>
       </focus-group>

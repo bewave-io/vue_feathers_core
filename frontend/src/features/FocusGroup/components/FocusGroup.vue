@@ -1,100 +1,96 @@
-<script setup lang="ts" generic="T extends PiniaModel | object, E extends object">
-import type { PiniaModel } from '@f/FocusGroup/types';
-import { computed, onMounted, Ref, ref } from 'vue';
+<script setup lang="ts" generic="T">
+import { onMounted, ref, VNode } from 'vue';
 import { vClickOutside } from '@f/Global/directives/click-outside';
 
-const model = defineModel<{modelValue: Ref<T>}>();
 const emit = defineEmits(['save']);
-const props = defineProps<{ errors: Ref<E>, isPending: boolean}>();
+const props = defineProps<{ data: T, isPending: boolean}>();
+defineSlots<{
+  display: (props: { data: T }) => VNode[];
+  edit: (props: { data: T }) => VNode[];
+  buttons: () => VNode[];
+  overlay: (props: { isPending: boolean }) => VNode[];
+}>();
 
-const editMode = ref(false);
+const editMode = ref<boolean>(false);
+const formRef = ref<HTMLFormElement>();
 const clone = ref<T>();
-const hasErrors = computed(() => props.errors && Object.values(props.errors).some((v) => !!v));
+
+interface PiniaInstance {
+  __isServiceInstance: true;
+  clone: () => T;
+}
+
+const isPiniaInstance = (instance: T | PiniaInstance): instance is PiniaInstance => {
+  return (instance as PiniaInstance)?.__isServiceInstance === true;
+}
+
 
 onMounted(() => {
-  if (model.value?.__isServiceInstance) {
-    clone.value = model.value.clone();
+  if (isPiniaInstance(props.data)) {
+    clone.value = props.data.clone();
   } else {
-    clone.value = {... model.value};
+    clone.value = {... props.data};
   }
 });
 
-const close = () => {
+const close = (): void => {
   editMode.value = false;
+};
+
+const onFocus = async (event: FocusEvent): Promise<void> => {
+  if (!editMode.value && event.target) {
+    editMode.value = true;
+    event.target?.querySelector('input,select,textarea')?.focus();
+  } else {
+    event.preventDefault();
+  }
 };
 
 const onSubmit = (): void => {
   emit('save', clone);
 };
 
-const overlayClass = computed(() => {
-  if (props.isPending) {
-    return 'pending';
-  }
-  return '';
-});
-
-const handleKeyUp = (event: KeyboardEvent) => {
+const onKeyDownLastButton = (event: KeyboardEvent): void => {
   if (!event.shiftKey && event.key === 'Tab') {
     close();
   }
 };
+
+const onKeyDownForm = (event: KeyboardEvent): void => {
+  if (event.key === 'Escape') {
+    close();
+  }
+}
+
+defineExpose({ close });
 </script>
 
 <template>
-  <div tabindex="0" @focus="editMode = true" v-click-outside="close" style="position: relative;" :class="overlayClass">
-    <q-form v-if="editMode" @submit="onSubmit">
-      <div class="row">
+  <div tabindex="0" @focus="onFocus" v-click-outside="close" style="position: relative;" :class="isPending ? 'pending' : ''">
+    <q-form v-if="editMode" @submit="onSubmit" @keydown="onKeyDownForm" ref="formRef">
+      <div class="row flex-center align-middle">
         <div class="col">
-          <slot name="edit" :model="model" />
+          <slot name="edit" :data="data" />
         </div>
         <div class="col-auto q-gutter-sm">
           <slot name="buttons">
-            <q-btn type="submit" flat olor="primary" icon="save" />
-            <q-btn @click="close" flat icon="cancel" @keydown="handleKeyUp" />
+            <q-btn type="submit" flat olor="primary" icon="save" padding="0" />
+            <q-btn @click="close" flat icon="cancel" @keydown="onKeyDownLastButton" padding="0" />
           </slot>
         </div>
       </div>
-      <ul v-if="hasErrors" class="errors">
-        <li v-for="[field, error] in Object.entries(errors)" :key="`${field}-error`">
-          {{ field }}: {{ error }}
-        </li>
-      </ul>
-      <q-inner-loading
-        :showing="isPending"
-        size="1em"
-        label="Please wait..."
-        label-class="text-blue"
-        label-style="font-size: 1.1em"
-      />
+      <slot name="overlay" :is-pending="isPending">
+        <q-inner-loading
+          :showing="isPending"
+          size="1em"
+          label="Please wait..."
+          label-class="text-blue"
+          label-style="font-size: 1.1em"
+        />
+      </slot>
     </q-form>
     <div @click="editMode = true" v-else>
-      <slot name="display" :model="model" tabindex="0" />
+      <slot name="display" :data="clone" tabindex="0" />
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.error {
-  border: 2px solid rgba(255, 0, 0, 0.83);
-  .q-inner-loading {
-    background: rgba(255, 0, 0, 0.6);
-  }
-}
-.pending {
-  border: 2px solid #6bfcfc;
-  .q-inner-loading {
-    background: rgba(107, 252, 252, 0.6);
-  }
-}
-.success {
-  border: 2px solid #82ff00;
-  .q-inner-loading {
-    background: rgba(130, 255, 0, 0.6);
-  }
-}
-
-ul.errors {
-  color: red;
-}
-</style>
