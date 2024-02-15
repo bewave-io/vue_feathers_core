@@ -38,7 +38,9 @@ const handleSaveDog = async (clone: typeof dogModel) => {
       <h1 class="text-h4">Test focus groups</h1>
       <focus-group :data="myModel" class="col" @save="handleSave" :is-pending="isPending">
         <template #display="{ data }">
-         {{ data.nickname }} {{ data.firstName }} {{ data.lastName }}
+          <template>
+            {{ data.nickname }} {{ data.firstName }} {{ data.lastName }}
+          </template>
         </template>
         <template #edit="{ data }">
           <div class="row q-col-gutter-md flex">
@@ -51,7 +53,7 @@ const handleSaveDog = async (clone: typeof dogModel) => {
       <q-input v-model="anotherTest" label="Another field" />
       <focus-group :data="dogModel" class="col" @save="handleSaveDog" :is-pending="isDogPending">
         <template #display="{ data }">
-          {{ data?.nickname }} {{ data?.firstName }} {{ data?.lastName }}
+          {{ data.nickname }} {{ data.firstName }} {{ data.lastName }}
         </template>
         <template #edit="{ data }">
           <div class="row q-col-gutter-md flex">
