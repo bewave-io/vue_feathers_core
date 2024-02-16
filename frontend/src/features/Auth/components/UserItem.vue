@@ -9,6 +9,7 @@ import { ServiceInstance } from 'feathers-pinia';
 
 import UserAvatar from '@f/Auth/components/UserAvatar.vue';
 import UserForm from '@f/Auth/components/UserForm.vue';
+import PiniaFocusGroup from '@f/FocusGroup/components/PiniaFocusGroup.vue';
 
 const props = defineProps<{ user: ServiceInstance<UserType> }>();
 const $q = useQuasar();
@@ -16,6 +17,7 @@ const auth = useAuthStore();
 const User = useFeathersService('users');
 
 const showDeletePrompt = ref<boolean>(false);
+const isPending = ref<boolean>(false);
 const showEditForm = ref<boolean>(false);
 
 const deleteUser = async () => {
@@ -40,9 +42,10 @@ const deleteUser = async () => {
     });
   }
 };
-const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
+const updateUser = async (userClone: Ref<ServiceInstance<UserType>>) => {
   try {
-    userClone.value.save();
+    isPending.value = true;
+    await userClone.value.save();
     $q.notify({
       color: 'green-4',
       textColor: 'white',
@@ -59,6 +62,7 @@ const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
       message: 'Unable to update the user',
     });
   }
+  isPending.value = false;
 };
 </script>
 
@@ -68,7 +72,19 @@ const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
       <user-avatar :user="user" />
     </q-item-section>
     <q-item-section>
-      <q-item-label class="q-mt-sm">{{ user.fullName }}</q-item-label>
+      <q-item-label class="q-mt-sm">
+        <pinia-focus-group :model="user">
+          <template #display="{ data }">
+            {{ data.firstName }} {{ data.lastName }}
+          </template>
+          <template #edit="{ data }">
+            <div class="row q-col-gutter-md">
+              <q-input v-model="data.firstName" class="col-6" autofocus />
+              <q-input v-model="data.lastName" class="col-6" />
+            </div>
+          </template>
+        </pinia-focus-group>
+      </q-item-label>
     </q-item-section>
     <q-item-section>
       <q-item-label>{{ user.email }}</q-item-label>

@@ -45,3 +45,15 @@ export const useFeathersService = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return client.service(servicePath as any);
 };
+
+export type PiniaInstance<T extends object> = T & {
+  __isServiceInstance: true;
+  clone: () => PiniaInstance<T>;
+  save: () => Promise<void>;
+};
+
+export const isPiniaInstance = <T extends object>(
+  instance: object | PiniaInstance<T>,
+): instance is PiniaInstance<T> => {
+  return (instance as PiniaInstance<T>)?.__isServiceInstance === true;
+};
