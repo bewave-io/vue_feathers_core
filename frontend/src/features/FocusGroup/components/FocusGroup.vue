@@ -8,9 +8,7 @@ type ModelData = T | PiniaInstance<T>;
 const emit = defineEmits(['save']);
 const props = withDefaults(
   defineProps<{ data: ModelData; isPending?: boolean }>(),
-  {
-    isPending: false,
-  },
+  { isPending: false },
 );
 
 defineSlots<{
@@ -38,9 +36,10 @@ const close = (): void => {
 const onFocus = async (event: FocusEvent): Promise<void> => {
   if (!editMode.value && event.target) {
     editMode.value = true;
-    (
-      event.target?.querySelector('input,select,textarea') as HTMLInputElement
-    )?.focus();
+    const firstElement = event.target?.querySelector(
+      'input,select,textarea',
+    ) as HTMLInputElement;
+    firstElement?.focus();
   } else {
     event.preventDefault();
   }

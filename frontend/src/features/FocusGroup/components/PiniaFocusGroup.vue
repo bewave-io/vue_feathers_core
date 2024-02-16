@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T extends object">
 import FocusGroup from '@f/FocusGroup/components/FocusGroup.vue';
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { PiniaInstance } from '@/feathers-client';
 import { sleep } from '@f/Global/helper';
 
@@ -13,10 +13,8 @@ enum State {
 defineProps<{ model: PiniaInstance<T> }>();
 
 const state = ref<State | null>();
-const handleSave = async (clone: PiniaInstance<T>) => {
-  console.log('Save called', clone);
+const handleSave = async (clone: Ref<PiniaInstance<T>>): void => {
   state.value = State.pending;
-  // clone.value.foo = "bar"
   try {
     await clone.value.save();
     await sleep(1000);
@@ -25,7 +23,6 @@ const handleSave = async (clone: PiniaInstance<T>) => {
     state.value = null;
   } catch (e) {
     state.value = State.error;
-    console.error(e);
   }
 };
 </script>
@@ -45,22 +42,14 @@ const handleSave = async (clone: PiniaInstance<T>) => {
       />
       <div
         v-if="state === State.success"
-        class="full-width full-height absolute-top-left flex flex-center"
-        style="
-          background-color: rgba(0, 255, 0, 0.6);
-          backdrop-filter: blur(1px);
-        "
+        class="full-width full-height absolute-top-left flex flex-center message-overlay message-overlay-success"
         @click.prevent.stop="state = null"
       >
         <div class="text-white text-bold">Success</div>
       </div>
       <div
         v-if="state === State.error"
-        class="full-width full-height absolute-top-left flex flex-center"
-        style="
-          background-color: rgba(255, 0, 0, 0.6);
-          backdrop-filter: blur(1px);
-        "
+        class="full-width full-height absolute-top-left flex flex-center message-overlay message-overlay-error"
         @click.prevent.stop="state = null"
       >
         <div class="text-white text-bold">Error saving</div>
@@ -68,3 +57,16 @@ const handleSave = async (clone: PiniaInstance<T>) => {
     </template>
   </FocusGroup>
 </template>
+
+<style lang="scss" scoped>
+.message-overlay {
+  backdrop-filter: blur(1px);
+
+  &-success {
+    background-color: rgba(0, 255, 0, 0.6);
+  }
+  &-error {
+    background-color: rgba(255, 0, 0, 0.6);
+  }
+}
+</style>

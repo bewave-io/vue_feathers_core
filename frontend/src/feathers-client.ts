@@ -48,7 +48,8 @@ export const useFeathersService = (
 
 export type PiniaInstance<T extends object> = T & {
   __isServiceInstance: true;
-  clone: () => T;
+  clone: () => PiniaInstance<T>;
+  save: () => Promise<void>;
 };
 
 export const isPiniaInstance = <T extends object>(
