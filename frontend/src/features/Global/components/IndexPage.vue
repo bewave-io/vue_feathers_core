@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import bewaveLogoUrl from '@/assets/images/logos/bewave.svg';
 import { useAuthStore } from '@f/Auth/store';
-
+import { useFeathersService } from '@/feathers-client';
+const User = useFeathersService('users');
+const mocks = useFeathersService('mocks');
 const auth = useAuthStore();
+
+const testMock =async () => {
+ await mocks.get(1);
+}
 </script>
 
 <template>
   <q-page padding class="flex flex-center row">
+
+    <q-btn @click="User.get(13)">user get</q-btn>
+    <q-btn @click="testMock">mocks get</q-btn>
     <div class="q-pa-md flex flex-center">
       <div class="container text-center">
         <h1 class="text-h4">
