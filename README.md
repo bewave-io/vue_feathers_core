@@ -13,3 +13,11 @@ Located in `./backend`. View [`README.md`](./backend/README.md) for more info.
 This project uses [Vue](https://vuejs.org/guide/introduction.html) with [Quasar](https://v2.quasar.dev) and [Feathers Pinia](https://feathers-pinia.pages.dev/guide/) as the Frontend
 
 Located in `./frontend`. View [`README.md`](./frontend/README.md) for more info.
+
+## Database
+
+You can simply start a MongoDB instance using Docker by running:
+
+```bash
+docker run -p 27017:27017 --rm --name trello-clone-mongodb -v ~/path/to/data/data:/data/db mongo:latest
+```

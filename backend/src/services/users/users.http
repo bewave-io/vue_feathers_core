@@ -1,0 +1,10 @@
+POST https://reqres.in/api/users
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Dash",
+    "avatarUrl": "",
+    "email": "a",
+    "password": "a"
+}
