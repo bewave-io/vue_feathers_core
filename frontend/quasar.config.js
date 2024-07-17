@@ -71,6 +71,8 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
+      devtool: 'source-map',
+
       extendViteConf(viteConf) {
         Object.assign(viteConf.resolve.alias, {
           '@f': path.join(__dirname, './src/features'),

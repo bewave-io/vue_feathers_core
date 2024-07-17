@@ -11,9 +11,10 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
 
     ```
     cd ./backend
-    yarn
+    yarn --frozen-lockfile
     ```
 
+## Database (also in the project level README)
 3. Start MongoDb
 
    ```bash

@@ -5,7 +5,7 @@ Project Frontend using [Vue](https://vuejs.org/guide/introduction.html) with [Qu
 ## Install the dependencies
 
 ```bash
-yarn
+yarn --frozen-lockfile
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
