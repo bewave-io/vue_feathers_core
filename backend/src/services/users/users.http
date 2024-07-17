@@ -1,10 +1,13 @@
-POST https://reqres.in/api/users
+POST http://localhost:3030/users
 Content-Type: application/json
 
 {
     "firstName": "John",
     "lastName": "Dash",
-    "avatarUrl": "",
     "email": "a",
     "password": "a"
 }
+
+###
+GET http://localhost:3030/users
+Content-Type: application/json
