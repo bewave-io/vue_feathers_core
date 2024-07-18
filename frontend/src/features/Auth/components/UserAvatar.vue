@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import type { User as UserType } from "project-template-backend";
 
-const props = withDefaults(defineProps<{ user; size?: number }>(), {
+import { ServiceInstance } from "feathers-pinia";
+import { computed } from "vue";
+
+const props = withDefaults(defineProps<{ user: ServiceInstance<UserType>; size?: number }>(), {
   size: 80,
 });
 const avatarUrl = computed<string>(() => {
@@ -11,7 +14,10 @@ const avatarUrl = computed<string>(() => {
 
 <template>
   <q-avatar>
-    <img :src="avatarUrl" :alt="`${user.fullName}'s profile picture`" />
+    <img
+      :src="avatarUrl"
+      :alt="`${user.fullName}'s profile picture`"
+    />
     <slot />
   </q-avatar>
 </template>

@@ -1,7 +1,8 @@
-import { boot } from 'quasar/wrappers';
-import { useAuthStore } from './store';
+import { boot } from "quasar/wrappers";
 
-const publicRoutes = ['index', 'auth-login', 'auth-signup'];
+import { useAuthStore } from "./store";
+
+const publicRoutes = ["index", "auth-login", "auth-signup"];
 
 export default boot(async ({ router }) => {
   /**
@@ -16,7 +17,7 @@ export default boot(async ({ router }) => {
     // check auth and apply login redirect
     if (!authStore.user && !publicRoutes.includes(to.name as string)) {
       authStore.loginRedirect = to;
-      return next({ name: 'auth-login' });
+      return next({ name: "auth-login" });
     }
     return next();
   });

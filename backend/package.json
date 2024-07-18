@@ -1,7 +1,7 @@
 {
   "name": "project-template-backend",
   "description": "Project Template - Backend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "",
   "private": true,
   "keywords": [
@@ -36,6 +36,7 @@
   "main": "lib/client",
   "scripts": {
     "dev": "nodemon -x ts-node src/index.ts",
+    "dev:inspect": "nodemon --inspect src/index.ts",
     "compile": "shx rm -rf lib/ && tsc",
     "start": "node lib/",
     "format": "npx prettier \"**/*.ts\" --write",

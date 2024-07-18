@@ -1,10 +1,11 @@
-import { defineStore, acceptHMRUpdate } from 'pinia';
-import { useAuth } from 'feathers-pinia';
-import { useFeathers } from '@/feathers-client';
+import { useAuth } from "feathers-pinia";
+import { acceptHMRUpdate, defineStore } from "pinia";
 
-export const useAuthStore = defineStore('auth', () => {
+import { useFeathers } from "@/feathers-client";
+
+export const useAuthStore = defineStore("auth", () => {
   const { api } = useFeathers();
-  const utils = useAuth({ api, servicePath: 'users' });
+  const utils = useAuth({ api, servicePath: "users" });
 
   utils.reAuthenticate();
 

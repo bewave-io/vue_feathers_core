@@ -1,60 +1,66 @@
 <script setup lang="ts">
-import type { ServiceInstance } from 'feathers-pinia';
-import type { User } from 'project-template-backend';
+import type { AnyData, ServiceInstance } from "feathers-pinia";
+import type { User } from "project-template-backend";
 
-import { ref } from 'vue';
-import { checkEmail, checkRequiredString } from '@f/Global/validation';
+import { ref } from "vue";
 
-const props = defineProps<{ user: ServiceInstance<User> }>();
-const emit = defineEmits(['submit']);
+import { checkEmail, checkRequiredString } from "@f/Global/validation";
+
+// TODO: Type this properly!
+const props = defineProps<{ user: AnyData }>();
+const emit = defineEmits(["submit"]);
 
 const editUser = ref<ServiceInstance<User>>(props.user.clone());
 const password = ref<string | undefined>(undefined);
-const confirmPassword = ref<string>('');
+const confirmPassword = ref<string>("");
 const isPasswordVisible = ref<boolean>(false);
 
 const checkPasswordConfirmation = (val: string | null) =>
-  !password.value || val === password.value || 'Passwords do not match';
+  !password.value || val === password.value || "Passwords do not match";
 
 const handleSubmit = () => {
   if (!editUser.value._id || password.value) {
     editUser.value.password = password.value;
   }
-  emit('submit', editUser);
+  emit("submit", editUser);
 };
 </script>
 
 <template>
-  <q-form @submit="handleSubmit" class="q-gutter-md q-pa-md" autocomplete="off">
+  <q-form
+    class="q-gutter-md q-pa-md"
+    autocomplete="off"
+    @submit="handleSubmit"
+  >
     <h1 class="text-h4 text-center">Create an account</h1>
     <q-input
       v-model="editUser.firstName"
-      label="First Name *"
+      label="First Name *"
       lazy-rules
       :rules="[checkRequiredString]"
     />
     <q-input
       v-model="editUser.lastName"
-      label="Last Name *"
+      label="Last Name *"
       lazy-rules
       :rules="[checkRequiredString]"
     />
     <q-input
       v-model="editUser.email"
-      label="Email *"
+      label="Email *"
       lazy-rules
       type="email"
       :rules="[checkRequiredString, checkEmail]"
     />
     <q-input
       v-model="password"
-      :label="editUser._id ? 'Change Password' : 'Password *'"
+      :label="editUser._id ? 'Change Password' : 'Password *'"
       :type="isPasswordVisible ? 'text' : 'password'"
       autocomplete="new-password"
       lazy-rules
       :rules="editUser._id ? [] : [checkRequiredString]"
     >
-      <template v-slot:append>
+      <template #append>
         <q-icon
           :name="isPasswordVisible ? 'visibility' : 'visibility_off'"
           class="cursor-pointer"
@@ -64,7 +70,7 @@ const handleSubmit = () => {
     </q-input>
     <q-input
       v-model="confirmPassword"
-      label="Confirm Password *"
+      label="Confirm Password *"
       :type="isPasswordVisible ? 'text' : 'password'"
       lazy-rules
       :rules="[checkPasswordConfirmation]"

@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import type { User as UserType } from 'project-template-backend';
+import type { User as UserType } from "project-template-backend";
 
-import { type Ref, ref } from 'vue';
-import { useQuasar } from 'quasar';
-import { useFeathersService } from '@/feathers-client';
-import { useAuthStore } from '@f/Auth/store';
-import { ServiceInstance } from 'feathers-pinia';
+import { ServiceInstance } from "feathers-pinia";
+import { useQuasar } from "quasar";
+import { type Ref, ref } from "vue";
 
-import UserAvatar from '@f/Auth/components/UserAvatar.vue';
-import UserForm from '@f/Auth/components/UserForm.vue';
+import { useFeathersService } from "@/feathers-client";
+import { useAuthStore } from "@f/Auth/store";
+
+import UserAvatar from "@f/Auth/components/UserAvatar.vue";
+import UserForm from "@f/Auth/components/UserForm.vue";
 
 const props = defineProps<{ user: ServiceInstance<UserType> }>();
 const $q = useQuasar();
 const auth = useAuthStore();
-const User = useFeathersService('users');
+const User = useFeathersService("users");
 
 const showDeletePrompt = ref<boolean>(false);
 const showEditForm = ref<boolean>(false);
@@ -25,18 +26,18 @@ const deleteUser = async () => {
   try {
     await User.remove(props.user._id as string);
     $q.notify({
-      color: 'green-4',
-      textColor: 'white',
-      icon: 'check',
+      color: "green-4",
+      textColor: "white",
+      icon: "check",
       message: `User ${props.user.firstName} was deleted.`,
     });
   } catch (error) {
     console.error(error);
     $q.notify({
-      color: 'red-4',
-      textColor: 'white',
-      icon: 'error',
-      message: 'Unable to delete the user',
+      color: "red-4",
+      textColor: "white",
+      icon: "error",
+      message: "Unable to delete the user",
     });
   }
 };
@@ -44,19 +45,19 @@ const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
   try {
     userClone.value.save();
     $q.notify({
-      color: 'green-4',
-      textColor: 'white',
-      icon: 'check',
+      color: "green-4",
+      textColor: "white",
+      icon: "check",
       message: `User ${userClone.value.firstName} was updated.`,
     });
     showEditForm.value = false;
   } catch (error) {
     console.error(error);
     $q.notify({
-      color: 'red-4',
-      textColor: 'white',
-      icon: 'error',
-      message: 'Unable to update the user',
+      color: "red-4",
+      textColor: "white",
+      icon: "error",
+      message: "Unable to update the user",
     });
   }
 };
@@ -75,13 +76,18 @@ const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
     </q-item-section>
     <q-item-section side>
       <div>
-        <q-btn icon="edit" color="green" flat @click="showEditForm = true" />
+        <q-btn
+          icon="edit"
+          color="green"
+          flat
+          @click="showEditForm = true"
+        />
         <q-btn
           icon="delete"
           color="red"
           flat
-          @click="showDeletePrompt = true"
           :disabled="user._id === auth.user._id"
+          @click="showDeletePrompt = true"
         />
       </div>
     </q-item-section>
@@ -89,28 +95,47 @@ const updateUser = (userClone: Ref<ServiceInstance<UserType>>) => {
   <q-dialog v-model="showDeletePrompt">
     <q-card>
       <q-card-section class="row items-center">
-        <q-avatar icon="person" color="primary" text-color="white" />
-        <span class="q-ml-sm"
-          >Are you sure you want to delete "{{ user.fullName }}"?</span
-        >
+        <q-avatar
+          icon="person"
+          color="primary"
+          text-color="white"
+        />
+        <span class="q-ml-sm">Are you sure you want to delete "{{ user.fullName }}"?</span>
       </q-card-section>
       <q-card-actions align="right">
         <q-btn
+          v-close-popup
           flat
           label="remove"
           color="red"
           @click="deleteUser"
-          v-close-popup
         />
-        <q-btn flat label="Cancel" color="primary" v-close-popup />
+        <q-btn
+          v-close-popup
+          flat
+          label="Cancel"
+          color="primary"
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>
-  <q-dialog v-model="showEditForm" persistent>
+  <q-dialog
+    v-model="showEditForm"
+    persistent
+  >
     <q-card>
-      <user-form :user="user" v-if="showEditForm" @submit="updateUser">
+      <user-form
+        v-if="showEditForm"
+        :user="user"
+        @submit="updateUser"
+      >
         <template #buttons>
-          <q-btn v-close-popup class="col-12 col-sm-4 q-ma-sm">Cancel</q-btn>
+          <q-btn
+            v-close-popup
+            class="col-12 col-sm-4 q-ma-sm"
+          >
+            Cancel
+          </q-btn>
           <q-btn
             label="Save"
             type="submit"
