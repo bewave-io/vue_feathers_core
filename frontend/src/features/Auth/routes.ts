@@ -6,12 +6,12 @@ export default [
       {
         name: "auth-login",
         path: "/auth/login",
-        component: () => import("./components/LoginPage.vue"),
+        component: () => import("src/features/Auth/components/LoginView.vue"),
       },
       {
         name: "auth-signup",
         path: "/auth/signup",
-        component: () => import("./components/SignupPage.vue"),
+        component: () => import("src/features/Auth/components/SignupView.vue"),
       },
     ],
   },
@@ -22,7 +22,7 @@ export default [
       {
         name: "user-list",
         path: "/users/",
-        component: () => import("../Auth/components/UserListPage.vue"),
+        component: () => import("src/features/Auth/components/UserListView.vue"),
       },
     ],
   },
