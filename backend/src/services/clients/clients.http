@@ -1,0 +1,13 @@
+POST http://localhost:3030/clients
+Content-Type: application/json
+
+{
+  "name": "John",
+  "email": "test@bw.io",
+  "phone": "+1438500000",
+  "address": "a"
+}
+
+###
+GET http://localhost:3030/clients
+Content-Type: application/json

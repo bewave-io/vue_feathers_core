@@ -22,7 +22,7 @@ export * from './clients.class';
 export * from './clients.schema';
 
 // A configure function that registers the service and its hooks via `app.configure`
-export const clients = (app: Application) => {
+export const client = (app: Application) => {
   // Register our service on the Feathers application
   app.use(clientsPath, new ClientsService(getOptions(app)), {
     // A list of all methods this service exposes externally
@@ -34,9 +34,9 @@ export const clients = (app: Application) => {
   app.service(clientsPath).hooks({
     around: {
       all: [
-        authenticate('jwt'),
         schemaHooks.resolveExternal(clientExternalResolver),
         schemaHooks.resolveResult(clientResolver),
+        authenticate('jwt')
       ],
     },
     before: {

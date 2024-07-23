@@ -13,6 +13,7 @@ export const clientSchema = Type.Object(
   {
     _id: ObjectIdSchema(),
     name: Type.String(),
+    email: Type.String(),
     phone: Type.String(),
     address: Type.String(),
   },
@@ -25,7 +26,7 @@ export const clientResolver = resolve<Client, HookContext<ClientsService>>({});
 export const clientExternalResolver = resolve<Client, HookContext<ClientsService>>({});
 
 // Schema for creating new entries
-export const clientDataSchema = Type.Pick(clientSchema, ['_id', 'email', 'phone', 'address'], {
+export const clientDataSchema = Type.Pick(clientSchema, ['_id', 'name', 'email', 'phone', 'address'], {
   $id: 'ClientsData',
 });
 export type ClientData = Static<typeof clientDataSchema>;
@@ -41,7 +42,7 @@ export const clientPatchValidator = getValidator(clientPatchSchema, dataValidato
 export const clientPatchResolver = resolve<Client, HookContext<ClientsService>>({});
 
 // Schema for allowed query properties
-export const clientQueryProperties = Type.Pick(clientSchema, ['_id', 'email', 'phone', 'address']);
+export const clientQueryProperties = Type.Pick(clientSchema, ['_id', 'name', 'email', 'phone', 'address']);
 export const clientQuerySchema = Type.Intersect(
   [
     querySyntax(clientQueryProperties),
