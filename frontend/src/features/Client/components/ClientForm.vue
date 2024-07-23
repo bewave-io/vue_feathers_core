@@ -1,24 +1,24 @@
 <script setup lang="ts">
+import type { AnyData, ServiceInstance } from "feathers-pinia";
+import type { Client } from "project-template-backend";
+
 import { ref } from "vue";
 
 import { checkEmail, checkRequiredString } from "@f/Global/validation";
 
-const formData = ref({
-  name: "",
-  email: "",
-  phone: "",
-  address: "",
-});
+const props = defineProps<{ client: AnyData }>();
+const emit = defineEmits(["submit"]);
+
+const formData = ref<ServiceInstance<Client>>(props.client.clone());
 
 const rules = {
-  name: [checkRequiredString("Name is required")],
-  email: [checkRequiredString("Email is required"), checkEmail("Invalid email format")],
+  name: [checkRequiredString],
+  email: [checkRequiredString, checkEmail],
   // Add more rules for phone and address if needed
 };
 
 function saveClient() {
-  // Example of saving client data; replace with your logic
-  console.log(formData.value);
+  emit("submit", formData);
 }
 </script>
 

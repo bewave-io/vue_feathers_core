@@ -4,7 +4,7 @@ export default [
     component: () => import("../Global/layouts/MainLayout.vue"),
     children: [
       {
-        name: "client",
+        name: "client-list",
         path: "/clients",
         component: () => import("./components/ClientListView.vue"),
       },
