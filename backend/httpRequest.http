@@ -1,0 +1,14 @@
+### Login
+
+POST http://localhost:3030/authentication
+Content-Type: application/json
+
+{
+  "strategy": "local",
+  "email": "a",
+  "password": "a"
+}
+
+> {%
+  client.global.set("auth_token", response.body.accessToken);
+%}

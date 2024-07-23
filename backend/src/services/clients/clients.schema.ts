@@ -14,19 +14,19 @@ export const clientSchema = Type.Object(
     _id: ObjectIdSchema(),
     name: Type.String(),
     email: Type.String(),
-    phone: Type.String(),
-    address: Type.String(),
+    phone: Type.Optional(Type.String()),
+    address: Type.Optional(Type.String()),
   },
   { $id: 'Client', additionalProperties: false },
 );
 export type Client = Static<typeof clientSchema>;
-export const clientsValidator = getValidator(clientSchema, dataValidator);
+export const clientValidator = getValidator(clientSchema, dataValidator);
 export const clientResolver = resolve<Client, HookContext<ClientsService>>({});
 
 export const clientExternalResolver = resolve<Client, HookContext<ClientsService>>({});
 
 // Schema for creating new entries
-export const clientDataSchema = Type.Pick(clientSchema, ['_id', 'name', 'email', 'phone', 'address'], {
+export const clientDataSchema = Type.Pick(clientSchema, ['name', 'email', 'phone', 'address'], {
   $id: 'ClientsData',
 });
 export type ClientData = Static<typeof clientDataSchema>;

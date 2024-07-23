@@ -1,13 +1,15 @@
 POST http://localhost:3030/clients
 Content-Type: application/json
+Authorization: {{ auth_token }}
 
 {
-  "name": "John",
-  "email": "test@bw.io",
-  "phone": "+1438500000",
-  "address": "a"
+  "name": "Max",
+  "email": "max@bw.io",
+  "phone": "+1468500000",
+  "address": "H1H1H1"
 }
 
 ###
 GET http://localhost:3030/clients
 Content-Type: application/json
+Authorization: {{ auth_token }}

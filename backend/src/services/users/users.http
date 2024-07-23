@@ -1,13 +1,14 @@
-POST http://localhost:3030/users
-Content-Type: application/json
-
-{
-    "firstName": "John",
-    "lastName": "Dash",
-    "email": "a",
-    "password": "a"
-}
+#POST http://localhost:3030/users
+#Content-Type: application/json
+#
+#{
+#    "firstName": "John",
+#    "lastName": "Dash",
+#    "email": "a",
+#    "password": "a"
+#}
 
 ###
 GET http://localhost:3030/users
 Content-Type: application/json
+Authorization: {{ auth_token }}
