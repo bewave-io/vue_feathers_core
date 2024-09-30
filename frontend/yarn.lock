@@ -3855,9 +3855,9 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-"project-template-backend@http://localhost:3030/project-template-backend-0.1.0.tgz":
-  version "0.1.0"
-  resolved "http://localhost:3030/project-template-backend-0.1.0.tgz"
+"project-template-backend@file:../backend/public/project-template-backend-0.1.1.tgz":
+  version "0.1.1"
+  resolved "file:../backend/public/project-template-backend-0.1.1.tgz#f5b898abd10e278101a7fa838403c5dbd11a6758"
   dependencies:
     "@feathersjs/adapter-commons" "^5.0.21"
     "@feathersjs/authentication" "^5.0.21"
