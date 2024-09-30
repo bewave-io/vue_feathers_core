@@ -8,6 +8,10 @@ const crash = () => {
   const t = 0;
   // This will crash the app!!!
   // eslint-disable-next-line no-console
+
+  if (t === 2) {
+    console.log("t = 2!");
+  }
   console.log(...(t as unknown as string[]));
 };
 </script>
@@ -52,7 +56,7 @@ const crash = () => {
               :key="`feature-${feature}`"
               :to="{ name: `feature-${feature}` }"
             >
-              <q-item-label> View feature {{ feature.toUpperCase() }} </q-item-label>
+              <q-item-label> View feature {{ feature.toUpperCase() }}</q-item-label>
             </q-item>
           </q-list>
         </div>

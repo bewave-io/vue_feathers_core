@@ -8,7 +8,9 @@ export default boot(async ({ router }) => {
   /**
    * Check for authentication before each route.
    */
-  router.beforeEach(async (to, from, next) => {
+  router.beforeEach(async (to) => {
+    if (to.meta.public) return true;
+
     const authStore = useAuthStore();
 
     // always resolves. no need to catch
@@ -17,8 +19,8 @@ export default boot(async ({ router }) => {
     // check auth and apply login redirect
     if (!authStore.user && !publicRoutes.includes(to.name as string)) {
       authStore.loginRedirect = to;
-      return next({ name: "auth-login" });
+      return { name: "auth-login" };
     }
-    return next();
+    return true;
   });
 });
